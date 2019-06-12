@@ -1,0 +1,14 @@
+cl = FilteredElementCollector(doc)
+cl.OfCategory(BuiltInCategory.OST_RevisionClouds)
+cl.WhereElementIsNotElementType()
+
+for el in cl:
+
+	CommentRevision = el.LookupParameter("Revision").AsString() 
+	#CommentRevision = el.LookupParameter("Revision").Definition
+	#CommentRevision = el.LookupParameter("Revision").Definition.Name
+	CommentString = el.LookupParameter("Comments").AsString()
+	print(CommentString, CommentRevision)
+
+
+
