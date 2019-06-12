@@ -2,13 +2,20 @@ cl = FilteredElementCollector(doc)
 cl.OfCategory(BuiltInCategory.OST_RevisionClouds)
 cl.WhereElementIsNotElementType()
 
+
+def get_revision(element, parameterName):
+	return element.LookupParameter(parameterName).AsValueString()
+		
+def get_comments(element, parameterName):
+	
+	CommentString = element.LookupParameter("Comments").AsString()
+	return element.LookupParameter(parameterName).AsValueString()
+
+
 for el in cl:
 
-	CommentRevision = el.LookupParameter("Revision").AsString() 
-	#CommentRevision = el.LookupParameter("Revision").Definition
-	#CommentRevision = el.LookupParameter("Revision").Definition.Name
-	CommentString = el.LookupParameter("Comments").AsString()
-	print(CommentString, CommentRevision)
+	print get_revision(el, "Revision")
+	print get_comments(el, "Comments")
 
 
 
