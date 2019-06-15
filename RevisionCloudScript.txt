@@ -16,19 +16,19 @@ def get_comments(element, parameterName):
 def get_comment_parent_sheet_name():
 	#sheetId = elements.OwnerViewId.ToString()
 	#print(doc.GetElement(sheetId).LookupParameter("View Name").AsString())
-	return doc.GetElement(list(elements.GetSheetIds())[0]).Title
+	return doc.GetElement(list(element.GetSheetIds())[0]).Title
 	#comment parent sheet name 
 
 #looks like we dont need this one either.
 def get_comment_parent_sheet_number():
-	return doc.GetElement(list(elements.GetSheetIds())[0])
+	return doc.GetElement(list(element.GetSheetIds())[0])
 
 def get_comment_parent_view_name():
-	return doc.GetElement(elements.OwnerViewId).Name
+	return doc.GetElement(element.OwnerViewId).Name
 	#comment parent view name
 	
 def get_comment_parent_view_number(element, parameterName):
-	return doc.GetElement(elements.OwnerViewId).LookupParameter("Detail Number").AsString()
+	return doc.GetElement(element.OwnerViewId).LookupParameter("Detail Number").AsString()
 	
 for element in cl:
 
