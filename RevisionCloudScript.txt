@@ -1,3 +1,4 @@
+
 cl = FilteredElementCollector(doc)
 cl.OfCategory(BuiltInCategory.OST_RevisionClouds)
 cl.WhereElementIsNotElementType()
@@ -15,34 +16,28 @@ def get_comments(element, parameterName):
 def get_comment_parent_sheet_name():
 	#sheetId = elements.OwnerViewId.ToString()
 	#print(doc.GetElement(sheetId).LookupParameter("View Name").AsString())
-	print(doc.GetElement(list(elements.GetSheetIds())[0]).Title)
-	
-	return #comment parent sheet name 
+	return doc.GetElement(list(elements.GetSheetIds())[0]).Title
+	#comment parent sheet name 
 
 #looks like we dont need this one either.
 def get_comment_parent_sheet_number():
-	doc.GetElement(list(elements.GetSheetIds())[0])
+	return doc.GetElement(list(elements.GetSheetIds())[0])
 
-	return #comment parent sheet number
-	
 def get_comment_parent_view_name():
-	doc.GetElement(elements.OwnerViewId).Name
-	
-	return #comment parent view name
+	return doc.GetElement(elements.OwnerViewId).Name
+	#comment parent view name
 	
 def get_comment_parent_view_number(element, parameterName):
-	print(doc.GetElement(elements.OwnerViewId).LookupParameter("Detail Number").AsString())
-	return #comment parent view number
-
-
-
+	return doc.GetElement(elements.OwnerViewId).LookupParameter("Detail Number").AsString()
+	
 for element in cl:
 
 	
-	print get_comments(element, "Comments")
-	print get_revision(element, "Revision")
-	get_comment_parent_sheet_name()
-	get_comment_parent_view_number(element, "Detail Number")
+	print "Comment: " + get_comments(element, "Comments")
+	print "Revision: " + get_revision(element, "Revision")
+	print "Sheet Name: " + get_comment_parent_sheet_name()
+	print "Detail Number: " + get_comment_parent_view_number(element, "Detail Number")
+	print "\n"
 
 
 #TODO: GET PATICULAR REVISION
