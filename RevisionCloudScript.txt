@@ -1,24 +1,50 @@
 cl = FilteredElementCollector(doc)
 cl.OfCategory(BuiltInCategory.OST_RevisionClouds)
 cl.WhereElementIsNotElementType()
-#CommentString = element.LookupParameter("Comments").AsString()
 
+#probably dont need this one
 def get_revision(element, parameterName):
 	return element.LookupParameter(parameterName).AsValueString()
 		
 def get_comments(element, parameterName):
 	
-	#CommentString = element.LookupParameter("Comments").AsString()
-	return element.LookupParameter(parameterName).AsValueString()
+	CommentString = element.LookupParameter("Comments").AsString()
+	#return element.LookupParameter(parameterName).AsValueString()
+	return CommentString
+	
+def get_comment_parent_sheet_name():
+	#sheetId = elements.OwnerViewId.ToString()
+	#print(doc.GetElement(sheetId).LookupParameter("View Name").AsString())
+	print(doc.GetElement(list(elements.GetSheetIds())[0]).Title)
+	
+	return #comment parent sheet name 
+
+#looks like we dont need this one either.
+def get_comment_parent_sheet_number():
+	doc.GetElement(list(elements.GetSheetIds())[0])
+
+	return #comment parent sheet number
+	
+def get_comment_parent_view_name():
+	doc.GetElement(elements.OwnerViewId).Name
+	
+	return #comment parent view name
+	
+def get_comment_parent_view_number(element, parameterName):
+	print(doc.GetElement(elements.OwnerViewId).LookupParameter("Detail Number").AsString())
+	return #comment parent view number
+
 
 
 for element in cl:
 
-	CommentString = element.LookupParameter("Comments").AsString()
-	print(element.LookupParameter("Comments").AsString())
-	#print get_comments(elements, "Comments")
+	
+	print get_comments(element, "Comments")
 	print get_revision(element, "Revision")
+	get_comment_parent_sheet_name()
+	get_comment_parent_view_number(element, "Detail Number")
 
 
-
-
+#TODO: GET PATICULAR REVISION
+#TODO: EXPORT TO CSV
+#TODO: EXPORT TO WORD DOC IN RMW FORMAT
