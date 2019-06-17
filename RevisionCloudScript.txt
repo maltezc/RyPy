@@ -65,8 +65,8 @@ for element in cl:
 		print "View Name: " + get_comment_parent_view_name()
 		print "\n"
 	
-	'''else: 
-		print("There are no clouds on the" + selectedRevisionValue + "revision.")'''
+else: 
+	print("There are no revision clouds on the '" + selectedRevisionValue + "' revision.")
 
 
 #TODO: EXPORT TO CSV
