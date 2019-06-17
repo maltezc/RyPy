@@ -65,9 +65,10 @@ for element in cl:
 		print "View Name: " + get_comment_parent_view_name()
 		print "\n"
 	
-else: 
-	print("There are no revision clouds on the '" + selectedRevisionValue + "' revision.")
+	else: 
+		print("There are no revision clouds on the '" + selectedRevisionValue + "' revision.")
 
 
+#TODO: CHECK FOR EMPTY REVISIONS
 #TODO: EXPORT TO CSV
 #TODO: EXPORT TO WORD DOC IN RMW FORMAT
