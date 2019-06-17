@@ -3,25 +3,23 @@ cl = FilteredElementCollector(doc)
 cl.OfCategory(BuiltInCategory.OST_RevisionClouds)
 cl.WhereElementIsNotElementType()
 
-#probably dont need this one
+
 def get_revision(element, parameterName):
 	return element.LookupParameter(parameterName).AsValueString()
 		
 def get_comments(element, parameterName):
 	
 	CommentString = element.LookupParameter("Comments").AsString()
-	#return element.LookupParameter(parameterName).AsValueString()
 	return CommentString
 	
 def get_comment_parent_sheet_name():
-	#sheetId = elements.OwnerViewId.ToString()
-	#print(doc.GetElement(sheetId).LookupParameter("View Name").AsString())
 	return doc.GetElement(list(element.GetSheetIds())[0]).Title
 	#comment parent sheet name 
 
-#looks like we dont need this one either.
+'''#looks like we dont need this one either.
 def get_comment_parent_sheet_number():
 	return doc.GetElement(list(element.GetSheetIds())[0])
+'''
 
 def get_comment_parent_view_name():
 	return doc.GetElement(element.OwnerViewId).Name
@@ -37,6 +35,7 @@ for element in cl:
 	print "Revision: " + get_revision(element, "Revision")
 	print "Sheet Name: " + get_comment_parent_sheet_name()
 	print "Detail Number: " + get_comment_parent_view_number(element, "Detail Number")
+	print "View Name: " + get_comment_parent_view_name()
 	print "\n"
 
 
