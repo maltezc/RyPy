@@ -1,3 +1,13 @@
+'''
+This script will print out a list of selected revisions.
+
+This script was created by Christopher Maltez circa June 16th, 2019
+'''
+
+import rpw
+from rpw.ui.forms import Console
+from rpw.ui.forms import SelectFromList
+
 
 cl = FilteredElementCollector(doc)
 cl.OfCategory(BuiltInCategory.OST_RevisionClouds)
@@ -28,17 +38,36 @@ def get_comment_parent_view_name():
 def get_comment_parent_view_number(element, parameterName):
 	return doc.GetElement(element.OwnerViewId).LookupParameter("Detail Number").AsString()
 	
-for element in cl:
 
+revList = Revision.GetAllRevisionIds(doc)
+revNameList = []
+
+
+for x in revList: 
+	#print(doc.GetElement(x).Name)
+	revName = doc.GetElement(x).Name
+	revNameList.append(revName)
+	#for name in revNameList:
+		#print(name)
 	
-	print "Comment: " + get_comments(element, "Comments")
-	print "Revision: " + get_revision(element, "Revision")
-	print "Sheet Name: " + get_comment_parent_sheet_name()
-	print "Detail Number: " + get_comment_parent_view_number(element, "Detail Number")
-	print "View Name: " + get_comment_parent_view_name()
-	print "\n"
+selectedRevisionValue = SelectFromList('Test Window', revNameList)
+	
+	
+for element in cl:
+	if get_revision(element, "Revision") == selectedRevisionValue:
+	
+	# revision filter should go here
+	
+		print "Comment: " + get_comments(element, "Comments")
+		print "Revision: " + get_revision(element, "Revision")
+		print "Sheet Name: " + get_comment_parent_sheet_name()
+		print "Detail Number: " + get_comment_parent_view_number(element, "Detail Number")
+		print "View Name: " + get_comment_parent_view_name()
+		print "\n"
+	
+	'''else: 
+		print("There are no clouds on the" + selectedRevisionValue + "revision.")'''
 
 
-#TODO: GET PATICULAR REVISION
 #TODO: EXPORT TO CSV
 #TODO: EXPORT TO WORD DOC IN RMW FORMAT
