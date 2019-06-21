@@ -1,0 +1,31 @@
+'''get walls in revit file'''
+
+#Imports
+import rpw
+from Autodesk.Revit.DB import Element, Transaction
+
+doc = __revit__.ActiveUIDocument.Document
+uidoc = __revit__.ActiveUIDocument
+t = Transaction(doc, 'Set Parameter by Name')
+
+
+cl = FilteredElementCollector(doc) #grabs document 
+walls = cl.OfCategory(BuiltInCategory.OST_Walls).WhereElementIsNotElementType() #grabs and filters for walls
+
+#t.Start()
+
+#for x in walls: 
+	#if x.LookupParameter("Top Offset").AsValueString() != "0\' - 0\"": #filters for walls not equalling to 0
+	#	x.LookupParameter("Top Offset").SetValue("0\' - 0\"")
+for x in walls:
+ 	if x.LookupParameter("Top Offset").AsValueString() != "0\' - 0\"":
+ 		#x.get_Parameter(BuiltInParameter.WALL_TOP_OFFSET).Set("0\' - 0\"")
+ 		x.LookupParameter("Top Offset").Set(0)
+
+
+
+#End Transaction
+#t.Commit()
+		
+		#print(x.LookupParameter("Top Offset").AsValueString()) #prints out top offset string not equal to 0
+		#x.GetParemeter("Top Offset").SetValue("0")
