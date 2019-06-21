@@ -40,4 +40,14 @@ element = db.Element.from_int(952467)
 >>> element.parameters['Top Offset'].value
 ﻿4.0
 
+element = db.Element.from_int(352690)
+with db.Transaction('Change Comment Wall'):
+     element.parameters['Comments'].value = 'Something new'
+     
+with db.Transaction('Change height'):
+	element.parameters['Top Offset'].value = 10 
+ 
+
+
 '''
+
