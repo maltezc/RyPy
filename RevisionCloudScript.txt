@@ -53,13 +53,16 @@ selectedRevisionValue = SelectFromList('Test Window', revNameList)
 #clCount = 0
 with open('mycsv3.csv', 'w') as f:
 	#fieldnames = ['Comment']
-	#thewriter = csv.DictWriter(f, fieldnames=fieldnames)
-	thewriter = csv.writer(f, delimiter=' ')
-	#thewriter.writeheader()
- 
- 	for element in cl: 
-		if get_revision(element, "Revision") == selectedRevisionValue:
-			thewriter.writerow("i hope this works")
+	fieldnames = ['column1', 'column2', 'column3']
+	thewriter = csv.DictWriter(f, fieldnames=fieldnames)
+	#thewriter = csv.writer(f, delimiter=' ')
+	thewriter.writeheader()
+
+	for i in range(1, 10):
+ 	#for element in cl: 
+	#	if get_revision(element, "Revision") == selectedRevisionValue:
+		thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'three'})
+			#thewriter.writerow("i hope this works")
 			#print(element)
 			# thewriter.writerow({'Comment': get_comments(element, "Comments")})
 			#thewriter.writerow({'Comment': element})
@@ -120,6 +123,7 @@ with open('mycsv2.csv', 'w', newline='') as f:
 
 
 #TODO: CHECK FOR EMPTY REVISIONS
+#TODO: EXPORT TO SCHEDULE TO KEEP IN REVIT
 #TODO: EXPORT TO CSV
 '''
 with open('mycsv.csv', 'w', newline='') as f:
