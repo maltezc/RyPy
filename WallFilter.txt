@@ -29,3 +29,15 @@ for x in walls:
 		
 		#print(x.LookupParameter("Top Offset").AsValueString()) #prints out top offset string not equal to 0
 		#x.GetParemeter("Top Offset").SetValue("0")
+		
+		
+'''
+element = db.Element.from_int(952467)
+>>> element
+﻿<rpw:Wall [symbol:Generic - 3"] [id:952467]>
+>>> element.get_wall_type
+﻿<bound method Wall.get_wall_type of <rpw:Wall [symbol:Generic - 3"] [id:952467]>>
+>>> element.parameters['Top Offset'].value
+﻿4.0
+
+'''
