@@ -1,9 +1,9 @@
-﻿# these commands get executed in the current scope
+# these commands get executed in the current scope
 # of each new shell (but not for canned commands)
 
 import clr
 import rpw
-from rpw import revit, db, ui
+from rpw import revit, db, ui, DB, UI
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitAPIUI')
 
