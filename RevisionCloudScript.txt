@@ -72,6 +72,7 @@ with open('mycsv3.csv', 'w') as f:
 	     	
 	     	'''
 with open('mycsv2.csv', 'w', newline='') as f:
+with open('mycsv2.csv', 'w') as f:
      fieldnames = ['column1', 'column2', 'column3']
      thewriter = csv.DictWriter(f, fieldnames=fieldnames)
      thewriter.writeheader()
@@ -133,5 +134,7 @@ with open('mycsv.csv', 'w', newline='') as f:
      for i in range(1, 10):
          thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'three'})
 '''
+
+#INTEROP EXCEL seems to be the way to go for now
 
 #TODO: EXPORT TO WORD DOC IN RMW FORMAT
