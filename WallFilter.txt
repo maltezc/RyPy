@@ -1,4 +1,4 @@
-'''get walls in revit file'''
+﻿'''get walls in revit file'''
 
 #Imports
 import rpw
@@ -51,3 +51,32 @@ with db.Transaction('Change height'):
 
 '''
 
+'''
+import rpw
+from rpw import revit, db, ui, DB, UI
+
+element = db.Element.from_int(352690)
+with db.Transaction('Change height'):
+    element.parameters['Top Offset'].value = 10 
+
+# wall top constraint needs ot be set to a level. Cannot be unconnected. 
+'''
+
+'''
+import clr
+clr.AddReference('RevitAPI') 
+clr.AddReference('RevitAPIUI') 
+from Autodesk.Revit.DB import * 
+from Autodesk.Revit.UI import *
+app = __revit__.Application
+doc = __revit__.ActiveUIDocument.Document
+ui = __revit__.ActiveUIDocument
+
+element = doc.GetElement(ElementId(352690))
+
+t = Transaction (doc, 'Change Height')
+t.Start()
+parameter = element.GetParameters('Top Offset')[0]
+parameter.Set(10)   
+t.Commit()
+'''
