@@ -1,0 +1,16 @@
+#create headers
+
+xlrange = worksheet.Range["B5", "D14"]
+b = Array.CreateInstance(object, 2, 2)
+
+#create row counter
+	# row range would be 1 + list
+	
+#create column counter
+	#column would be category number (not hard)
+	
+#for x in row, somehow print this. increase col counter by 1 after columns are filled.
+#for x in cl:
+	#b[colCounter, rowCounter] = comment
+	#b[colCounter+1, rowCounter] = revision
+	#rowCounter+1
