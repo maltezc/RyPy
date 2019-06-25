@@ -42,15 +42,16 @@ cl.WhereElementIsNotElementType()
 
 def get_revision(element, parameterName):
 	return element.LookupParameter(parameterName).AsValueString()
-	#revision = element.LookupParameter(parameterName).AsValueString()
+	#need to check for zeros
 
 def get_comments(element, parameterName):
 	CommentString = element.LookupParameter("Comments").AsString()
 	return CommentString
+	#need to check for zeros
 	
 def get_comment_parent_sheet_name():
 	return doc.GetElement(list(element.GetSheetIds())[0]).Title
-	#sheetName = doc.GetElement(list(element.GetSheetIds())[0]).Title
+	#need to check for zeros
 
 '''#looks like we dont need this one either.
 def get_comment_parent_sheet_number():
@@ -59,19 +60,23 @@ def get_comment_parent_sheet_number():
 
 def get_comment_parent_view_name():
 	return doc.GetElement(element.OwnerViewId).Name
-	#viewName=doc.GetElement(element.OwnerViewId).Name
+	#need to check for zeros
 	
 def get_comment_parent_view_number(element, parameterName):
 	return doc.GetElement(element.OwnerViewId).LookupParameter("Detail Number").AsString()
-	#viewNumber = doc.GetElement(element.OwnerViewId).LookupParameter("Detail Number").AsString()
+	#need to check for zeros
 
 revList = Revision.GetAllRevisionIds(doc)
+#need to check for zeros
+
+
 revNameList = []
 
 
 for x in revList: 
 	revName = doc.GetElement(x).Name
 	revNameList.append(revName)
+	#need to check for zeros
 	
 
 selectedRevisionValue = SelectFromList('Test Window', revNameList)
@@ -90,6 +95,7 @@ with open(filepath, 'wb') as f:
 
 
 	for element in cl: 
+		#need to check for zeros	
 		if get_revision(element, "Revision") == selectedRevisionValue:
 		#	if any(field.strip() for field in cl):
 			thewriter.writerow({
@@ -120,7 +126,6 @@ os.system("start EXCEL.EXE " + filepath)
 
 #TODO: CHECK FOR EMPTY REVISIONS
 #TODO: EXPORT TO SCHEDULE TO KEEP IN REVIT
-#TODO: EXPORT TO CSV
 '''
 #with open('C:\Users\cmaltez\Desktop\PyRy\mycsv.csv', 'w', newline='') as f:
 with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv4.csv', 'w') as f:
@@ -130,8 +135,6 @@ with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv4.csv', 'w') as f:
 	for i in range(1, 10):
 		thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'three'})
 '''
-
-#INTEROP EXCEL seems to be the way to go for now
 
 #TODO: EXPORT TO WORD DOC IN RMW FORMAT
 
