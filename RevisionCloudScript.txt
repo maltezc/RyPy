@@ -80,6 +80,8 @@ with open('mycsv2.csv', 'w') as f:
      for i in range(1, 10):
          thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'three'})
 '''
+
+
 	     	
 for element in cl: 
 	if get_revision(element, "Revision") == selectedRevisionValue:
