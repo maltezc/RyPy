@@ -59,8 +59,9 @@ with open('C:\Users\cmaltez\Desktop\PyRy\mycsv3.csv', 'w') as f:
 	thewriter.writeheader()
 
 	#for i in range(1, 10):
- 	#for element in cl: 
-	#	if get_revision(element, "Revision") == selectedRevisionValue:
+	
+for element in cl: 
+	if get_revision(element, "Revision") == selectedRevisionValue:
 	#	thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'hi'})
 			#thewriter.writerow("i hope this works")
 			#print(element)
@@ -80,33 +81,34 @@ with open('mycsv2.csv', 'w') as f:
          thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'three'})
 '''
 	     	
-	     	
-			#with open('mycsv.csv', 'w', newline='') as f:
-with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv2.csv', 'w') as f:
-	fieldnames = [
-		'Comment',
-		'Revsion', 
-		'Sheet Name', 
-		'View Number', 
-		'View Name'
-		]
-	thewriter = csv.DictWriter(f, fieldnames=fieldnames)
-	thewriter.writeheader()
-     	#thewriter.writerow({'Comment':'one'})	
-		#f.close()
+for element in cl: 
+	if get_revision(element, "Revision") == selectedRevisionValue:
+
+		with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv2.csv', 'w') as f:
+			fieldnames = [
+				'Comment',
+				'Revsion', 
+				'Sheet Name', 
+				'View Number', 
+				'View Name'
+				]
+			thewriter = csv.DictWriter(f, fieldnames=fieldnames)
+			thewriter.writeheader()
+		     	#thewriter.writerow({'Comment':'one'})	
+				#f.close()
+					
+					
+					#for i in range(1, 10):
+				    #         thewriter.writerow({'Comment':'one'})			
 			
-			
-			#for i in range(1, 10):
-		    #         thewriter.writerow({'Comment':'one'})			
-	
-			#for i in range(0, len(list(cl))):
-	thewriter.writerow({
-         'Comment': get_comments(element, "Comments"), 
-         'Revsion': get_revision(element, "Revision"), 
-         'Sheet Name': get_comment_parent_sheet_name(), 
-         'View Number': get_comment_parent_view_number(element, "Detail Number"), 
-         'View Name': get_comment_parent_view_name()
-         })
+					#for i in range(0, len(list(cl))):
+			thewriter.writerow({
+		         'Comment': get_comments(element, "Comments"), 
+		         'Revsion': get_revision(element, "Revision"), 
+		         'Sheet Name': get_comment_parent_sheet_name(), 
+		         'View Number': get_comment_parent_view_number(element, "Detail Number"), 
+		         'View Name': get_comment_parent_view_name()
+		         })
 	
 	'''
 	for element in cl:
