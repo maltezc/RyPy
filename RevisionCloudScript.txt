@@ -3,10 +3,18 @@ This script will print out a list of selected revisions.
 
 This script was created by Christopher Maltez circa June 16th, 2019
 '''
+import os
+#import getpass
 import csv
 import rpw
+import re
 from rpw.ui.forms import Console
 from rpw.ui.forms import SelectFromList
+
+
+desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+filepath = os.path.join(desktop, 'RevisionClouds.csv')
+
 
 
 cl = FilteredElementCollector(doc)
@@ -49,61 +57,23 @@ for x in revList:
 	
 
 selectedRevisionValue = SelectFromList('Test Window', revNameList)
-'''
-#clCount = 0
-with open('C:\Users\cmaltez\Desktop\PyRy\mycsv3.csv', 'w') as f:
-	fieldnames = ['Comment']
-	#fieldnames = ['column1', 'column2', 'column3']
+	     	
+#with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv2.csv', 'wb') as f:
+with open(filepath, 'wb') as f:
+	fieldnames = [
+		'Comment',
+		'Revsion', 
+		'Sheet Name', 
+		'View Number', 
+		'View Name'
+		]
 	thewriter = csv.DictWriter(f, fieldnames=fieldnames)
-	#thewriter = csv.writer(f, delimiter=' ')
 	thewriter.writeheader()
 
-	#for i in range(1, 10):
-	
-for element in cl: 
-	if get_revision(element, "Revision") == selectedRevisionValue:
-	#	thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'hi'})
-			#thewriter.writerow("i hope this works")
-			#print(element)
-			thewriter.writerow({'Comment': get_comments(element, "Comments")})
-			#thewriter.writerow({'Comment': element})
-			#print(get_comments(element, "Comments"))
-	     	
-''' 	
-	     	
-'''
-with open('mycsv2.csv', 'w', newline='') as f:
-with open('mycsv2.csv', 'w') as f:
-     fieldnames = ['column1', 'column2', 'column3']
-     thewriter = csv.DictWriter(f, fieldnames=fieldnames)
-     thewriter.writeheader()
-     for i in range(1, 10):
-         thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'three'})
-'''
 
-
-	     	
-for element in cl: 
-	if get_revision(element, "Revision") == selectedRevisionValue:
-
-		with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv2.csv', 'w') as f:
-			fieldnames = [
-				'Comment',
-				'Revsion', 
-				'Sheet Name', 
-				'View Number', 
-				'View Name'
-				]
-			thewriter = csv.DictWriter(f, fieldnames=fieldnames)
-			thewriter.writeheader()
-		     	#thewriter.writerow({'Comment':'one'})	
-				#f.close()
-					
-					
-					#for i in range(1, 10):
-				    #         thewriter.writerow({'Comment':'one'})			
-			
-					#for i in range(0, len(list(cl))):
+	for element in cl: 
+		if get_revision(element, "Revision") == selectedRevisionValue:
+		#	if any(field.strip() for field in cl):
 			thewriter.writerow({
 		         'Comment': get_comments(element, "Comments"), 
 		         'Revsion': get_revision(element, "Revision"), 
@@ -111,8 +81,10 @@ for element in cl:
 		         'View Number': get_comment_parent_view_number(element, "Detail Number"), 
 		         'View Name': get_comment_parent_view_name()
 		         })
+		         
+os.system("start EXCEL.EXE " + filepath)
 	
-	'''
+'''
 	for element in cl:
 		if get_revision(element, "Revision") == selectedRevisionValue:
 		
