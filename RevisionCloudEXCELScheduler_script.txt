@@ -3,11 +3,31 @@ This script will print out a list of selected revisions.
 
 This script was created by Christopher Maltez circa June 16th, 2019
 '''
+
 import os
 import csv
 import rpw
 from rpw.ui.forms import Console
 from rpw.ui.forms import SelectFromList
+
+import clr
+from rpw import revit, db, ui, DB, UI
+
+clr.AddReference('RevitAPI')
+clr.AddReference('RevitAPIUI')
+clr.AddReferenceByPartialName('PresentationCore')
+clr.AddReferenceByPartialName("PresentationFramework")
+clr.AddReferenceByPartialName('System')
+clr.AddReferenceByPartialName('System.Windows.Forms')
+
+from Autodesk.Revit.DB import *
+from Autodesk.Revit.DB.Architecture import *
+from Autodesk.Revit.DB.Analysis import *
+from Autodesk.Revit.UI import *
+
+from Autodesk.Revit import DB
+from Autodesk.Revit import UI
+
 
 
 desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
