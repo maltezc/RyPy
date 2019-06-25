@@ -4,10 +4,8 @@ This script will print out a list of selected revisions.
 This script was created by Christopher Maltez circa June 16th, 2019
 '''
 import os
-#import getpass
 import csv
 import rpw
-import re
 from rpw.ui.forms import Console
 from rpw.ui.forms import SelectFromList
 
