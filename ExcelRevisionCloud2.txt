@@ -1,3 +1,16 @@
+import clr
+clr.AddReference("Microsoft.Office.Interop.Excel")
+
+import Microsoft.Office.Interop.Excel as Excel
+excel = Excel.ApplicationClass()
+excel.Visible = True # makes the Excel application visible to the user
+
+# creating a new one
+workbook = excel.Workbooks.Add()
+
+# getting the active one
+workbook.ActiveSheet
+
 #create headers
 
 xlrange = worksheet.Range["B5", "D14"]
