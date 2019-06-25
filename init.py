@@ -4,13 +4,21 @@
 import clr
 import rpw
 from rpw import revit, db, ui, DB, UI
+
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitAPIUI')
+clr.AddReferenceByPartialName('PresentationCore')
+clr.AddReferenceByPartialName("PresentationFramework")
+clr.AddReferenceByPartialName('System')
+clr.AddReferenceByPartialName('System.Windows.Forms')
 
 from Autodesk.Revit.DB import *
 from Autodesk.Revit.DB.Architecture import *
 from Autodesk.Revit.DB.Analysis import *
 from Autodesk.Revit.UI import *
+
+from Autodesk.Revit import DB
+from Autodesk.Revit import UI
 
 
 uidoc = __revit__.ActiveUIDocument
