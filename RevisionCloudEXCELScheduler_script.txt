@@ -33,6 +33,19 @@ from Autodesk.Revit import UI
 desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 filepath = os.path.join(desktop, 'RevisionClouds.csv')
 
+#sl = FilteredElementCollector(doc)
+#sl.OfCategory(BuiltInCategory.OST_Sheets)
+#sheets = sl.OfCategory(BuiltInCategory.OST_Sheets)
+#for x in sheets:
+	#print(x.Id)
+#for x in cl:
+#	list(x.GetSheetIds())
+
+#this below might be a lead
+#clouds = db.Collector(of_category='Revision Clouds', is_type=False)
+#for x in clouds:
+	#print(x.OwnerViewId)
+	#doc.GetElement(x.OwnerViewId).Title
 
 
 cl = FilteredElementCollector(doc)
@@ -50,7 +63,8 @@ def get_comments(element, parameterName):
 	#need to check for zeros
 	
 def get_comment_parent_sheet_name():
-	return doc.GetElement(list(element.GetSheetIds())[0]).Title
+	return doc.GetElement(element.OwnerViewId).Title
+	#return doc.GetElement(list(element.GetSheetIds())[0]).Title
 	#need to check for zeros
 
 '''#looks like we dont need this one either.
