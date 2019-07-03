@@ -194,7 +194,10 @@ def get_comments(element, parameterName):
 # need to check for zeros
 
 def get_comment_parent_sheet_name():
-    return doc.GetElement(element.OwnerViewId).Title
+		try: 
+			return doc.GetElement(list(element.GetSheetIds())[0]).Title
+		except IndexError:
+			return doc.GetElement(element.OwnerViewId).Title
 
 
 # return doc.GetElement(list(element.GetSheetIds())[0]).Title
