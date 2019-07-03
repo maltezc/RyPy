@@ -157,22 +157,24 @@ from Autodesk.Revit.UI import *
 from Autodesk.Revit import DB
 from Autodesk.Revit import UI
 
+
+
 desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 filepath = os.path.join(desktop, 'RevisionClouds.csv')
 
-# sl = FilteredElementCollector(doc)
-# sl.OfCategory(BuiltInCategory.OST_Sheets)
-# sheets = sl.OfCategory(BuiltInCategory.OST_Sheets)
-# for x in sheets:
-# print(x.Id)
-# for x in cl:
+#sl = FilteredElementCollector(doc)
+#sl.OfCategory(BuiltInCategory.OST_Sheets)
+#sheets = sl.OfCategory(BuiltInCategory.OST_Sheets)
+#for x in sheets:
+	#print(x.Id)
+#for x in cl:
 #	list(x.GetSheetIds())
 
-# this below might be a lead
-# clouds = db.Collector(of_category='Revision Clouds', is_type=False)
-# for x in clouds:
-# print(x.OwnerViewId)
-# doc.GetElement(x.OwnerViewId).Title
+#this below might be a lead
+#clouds = db.Collector(of_category='Revision Clouds', is_type=False)
+#for x in clouds:
+	#print(x.OwnerViewId)
+	#doc.GetElement(x.OwnerViewId).Title
 
 
 cl = FilteredElementCollector(doc)
@@ -180,91 +182,81 @@ cl.OfCategory(BuiltInCategory.OST_RevisionClouds)
 cl.WhereElementIsNotElementType()
 
 
+def get_revCloudID(element):
+	return element.Id
+
 def get_revision(element, parameterName):
-    return element.LookupParameter(parameterName).AsValueString()
-
-
-# need to check for zeros
+	return element.LookupParameter(parameterName).AsValueString()
+	#need to check for zeros
 
 def get_comments(element, parameterName):
-    CommentString = element.LookupParameter("Comments").AsString()
-    return CommentString
-
-
-# need to check for zeros
-
+	CommentString = element.LookupParameter("Comments").AsString()
+	return CommentString
+	#need to check for zeros
+	
 def get_comment_parent_sheet_name():
 		try: 
 			return doc.GetElement(list(element.GetSheetIds())[0]).Title
 		except IndexError:
 			return doc.GetElement(element.OwnerViewId).Title
-
-
-# return doc.GetElement(list(element.GetSheetIds())[0]).Title
-# need to check for zeros
-
-'''#looks like we dont need this one either.
-def get_comment_parent_sheet_number():
-	return doc.GetElement(list(element.GetSheetIds())[0])
-'''
-
+	#need to check for zeros
 
 def get_comment_parent_view_name():
-    return doc.GetElement(element.OwnerViewId).Name
-
-
-# need to check for zeros
-
+	return doc.GetElement(element.OwnerViewId).Name
+	#need to check for zeros
+	
 def get_comment_parent_view_number(element, parameterName):
-    return doc.GetElement(element.OwnerViewId).LookupParameter("Detail Number").AsString()
-
-
-# need to check for zeros
+	return doc.GetElement(element.OwnerViewId).LookupParameter("Detail Number").AsString()
+	#need to check for zeros
 
 revList = Revision.GetAllRevisionIds(doc)
-# need to check for zeros
+#need to check for zeros
 
 
 revNameList = []
 
-for x in revList:
-    revName = doc.GetElement(x).Name
-    revNameList.append(revName)
-# need to check for zeros
 
+for x in revList: 
+	revName = doc.GetElement(x).Name
+	revNameList.append(revName)
+	#need to check for zeros
+	
 
 selectedRevisionValue = SelectFromList('Test Window', revNameList)
-
-# with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv2.csv', 'wb') as f:
+	     	
+#with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv2.csv', 'wb') as f:
 with open(filepath, 'wb') as f:
-    fieldnames = [
-        'Comment',
-        'Revsion',
-        'Sheet Name',
-        'View Number',
-        'View Name'
-    ]
-    thewriter = csv.DictWriter(f, fieldnames=fieldnames)
-    thewriter.writeheader()
+	fieldnames = [
+		'RevCloudID',
+		'Comment',
+		'Revsion', 
+		'Sheet Name', 
+		'View Number', 
+		'View Name'
+		]
+	thewriter = csv.DictWriter(f, fieldnames=fieldnames)
+	thewriter.writeheader()
 
-    for element in cl:
-        # need to check for zeros
-        if get_revision(element, "Revision") == selectedRevisionValue:
-            #	if any(field.strip() for field in cl):
-            thewriter.writerow({
-                'Comment': get_comments(element, "Comments"),
-                'Revsion': get_revision(element, "Revision"),
-                'Sheet Name': get_comment_parent_sheet_name(),
-                'View Number': get_comment_parent_view_number(element, "Detail Number"),
-                'View Name': get_comment_parent_view_name()
-            })
 
+	for element in cl: 
+		#need to check for zeros	
+		if get_revision(element, "Revision") == selectedRevisionValue:
+		#	if any(field.strip() for field in cl):
+			thewriter.writerow({
+				 'RevCloudID': get_revCloudID(element),
+		         'Comment': get_comments(element, "Comments"), 
+		         'Revsion': get_revision(element, "Revision"), 
+		         'Sheet Name': get_comment_parent_sheet_name(), 
+		         'View Number': get_comment_parent_view_number(element, "Detail Number"), 
+		         'View Name': get_comment_parent_view_name()
+		         })
+		         
 os.system("start EXCEL.EXE " + filepath)
-
+	
 '''
 	for element in cl:
 		if get_revision(element, "Revision") == selectedRevisionValue:
-
+		
 			print "Comment: " + get_comments(element, "Comments")
 			print "Revision: " + get_revision(element, "Revision")
 			print "Sheet Name: " + get_comment_parent_sheet_name()
@@ -272,13 +264,13 @@ os.system("start EXCEL.EXE " + filepath)
 			print "View Name: " + get_comment_parent_view_name()
 			print "\n"
 	'''
+	
+	#else: 
+	#	print("There are no revision clouds on the '" + selectedRevisionValue + "' revision.")
 
-# else:
-#	print("There are no revision clouds on the '" + selectedRevisionValue + "' revision.")
 
-
-# TODO: CHECK FOR EMPTY REVISIONS
-# TODO: EXPORT TO SCHEDULE TO KEEP IN REVIT
+#TODO: CHECK FOR EMPTY REVISIONS
+#TODO: EXPORT TO SCHEDULE TO KEEP IN REVIT
 '''
 #with open('C:\Users\cmaltez\Desktop\PyRy\mycsv.csv', 'w', newline='') as f:
 with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv4.csv', 'w') as f:
@@ -289,6 +281,6 @@ with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv4.csv', 'w') as f:
 		thewriter.writerow({'column1':'one', 'column2':'two', 'column3':'three'})
 '''
 
-# TODO: EXPORT TO WORD DOC IN RMW FORMAT
+#TODO: EXPORT TO WORD DOC IN RMW FORMAT
 
-# open function needs full filepath!
+#open function needs full filepath!

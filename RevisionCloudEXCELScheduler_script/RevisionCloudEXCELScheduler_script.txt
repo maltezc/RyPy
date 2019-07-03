@@ -53,6 +53,9 @@ cl.OfCategory(BuiltInCategory.OST_RevisionClouds)
 cl.WhereElementIsNotElementType()
 
 
+def get_revCloudID(element):
+	return element.Id
+
 def get_revision(element, parameterName):
 	return element.LookupParameter(parameterName).AsValueString()
 	#need to check for zeros
@@ -68,11 +71,6 @@ def get_comment_parent_sheet_name():
 		except IndexError:
 			return doc.GetElement(element.OwnerViewId).Title
 	#need to check for zeros
-
-'''#looks like we dont need this one either.
-def get_comment_parent_sheet_number():
-	return doc.GetElement(list(element.GetSheetIds())[0])
-'''
 
 def get_comment_parent_view_name():
 	return doc.GetElement(element.OwnerViewId).Name
@@ -100,6 +98,7 @@ selectedRevisionValue = SelectFromList('Test Window', revNameList)
 #with open(r'C:\Users\cmaltez\Desktop\PyRy\mycsv2.csv', 'wb') as f:
 with open(filepath, 'wb') as f:
 	fieldnames = [
+		'RevCloudID',
 		'Comment',
 		'Revsion', 
 		'Sheet Name', 
@@ -115,6 +114,7 @@ with open(filepath, 'wb') as f:
 		if get_revision(element, "Revision") == selectedRevisionValue:
 		#	if any(field.strip() for field in cl):
 			thewriter.writerow({
+				 'RevCloudID': get_revCloudID(element),
 		         'Comment': get_comments(element, "Comments"), 
 		         'Revsion': get_revision(element, "Revision"), 
 		         'Sheet Name': get_comment_parent_sheet_name(), 
