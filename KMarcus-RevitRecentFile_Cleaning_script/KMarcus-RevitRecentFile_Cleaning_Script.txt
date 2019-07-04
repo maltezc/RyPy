@@ -1,0 +1,18 @@
+#ken's Revit file cleaning script
+
+import getpass
+import os
+import re
+
+username = getpass.getuser()
+
+#change to his directory shown in email
+	#cwd to path with username to account for signin
+	
+#declare regex pattern to look for
+
+#scrape file for regex pattern
+	#remove lines with regex pattern
+	
+
+
