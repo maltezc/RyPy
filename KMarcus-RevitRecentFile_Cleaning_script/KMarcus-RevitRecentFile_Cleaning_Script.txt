@@ -1,18 +1,17 @@
-#ken's Revit file cleaning script
-
-import getpass
 import os
 import re
+import getpass
 
-username = getpass.getuser()
 
-#change to his directory shown in email
-	#cwd to path with username to account for signin
+os.chdir("/Users/chrismaltez/Desktop/kmarcus")
+filename = "revit.text"
+textfile = open(filename, 'r')
+matches = []
+
+for line in textfile:
 	
-#declare regex pattern to look for
-
-#scrape file for regex pattern
-	#remove lines with regex pattern
-	
 
 
+
+
+textfile.close()
